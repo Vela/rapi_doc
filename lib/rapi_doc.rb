@@ -21,7 +21,7 @@ module RapiDoc
     # Reads 'rake routes' output and gets the controller info
     def get_controller_info!
       controller_info = {}
-      
+
       # Use Railties to get routes information.
       # Manually set routes config file, because we're not actually in Rails.
       Rails.application.routes_reloader.instance_variable_set(:@paths, [File.join(Rails.root, "config/routes.rb")])
@@ -36,8 +36,7 @@ module RapiDoc
                 { name:   route.name,
                   verb:   route.verb,
                   path:   route.path,
-                  reqs:   route.reqs,
-                  regexp: route.json_regexp }
+                  reqs:   route.reqs }
               end
 
       routes.each do |entry|
@@ -103,8 +102,8 @@ module RapiDoc
       class_template = IO.read(config_dir('_resource_header.html.haml'))
       method_template = IO.read(config_dir('_resource_method.html.haml'))
       final_resource_docs = []
-      resource_docs.each { |resource| 
-        output = resource.parse_apidoc!(class_template, method_template) 
+      resource_docs.each { |resource|
+        output = resource.parse_apidoc!(class_template, method_template)
         if !output.nil? && !output.empty? # Keep only files that have API documentation.
           final_resource_docs << resource
         end
