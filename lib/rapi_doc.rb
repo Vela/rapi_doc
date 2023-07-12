@@ -36,8 +36,7 @@ module RapiDoc
                 { name:   route.name,
                   verb:   route.verb,
                   path:   route.path,
-                  reqs:   route.reqs,
-                  regexp: route.json_regexp }
+                  reqs:   route.reqs }
               end
 
       routes.each do |entry|
